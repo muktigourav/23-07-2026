@@ -1,0 +1,192 @@
+Dear All,
+
+ 
+
+We have rolled out ECKMS (Enterprise-wide Cryptographic Key Management Solution) Application, which includes two modules Certificate Management Solution and Key Management Solution.
+
+ 
+
+Certificate Management Solutions (CMS): To assist application owners to manage SSL certificates Life cycle management, which includes discover & renew the needed certificates in easy and automatic process, configure to get alerts before it’s expiry and schedule the renewal process (Mail already sent for the CMS integration which is attached herewith for reference). 
+
+ 
+
+Key Management Solution (KMS): We have implemented the centralized Key management solution as part of ECKMS project to assist application owners to manage their entire lifecycle of cryptographic keys, including their Creation, Distribution, Rotation, and eventual deletion in easy and automatic process. This solution manages cryptographic keys in secure way to comply with regulatory requirement.
+
+ 
+
+The competent authority had directed that AOs to manage their cryptographic keys in KMS. Accordingly, all are requested to arrange integration with KMS for the management of cryptographic keys based on the use cases applicable for your applications.
+
+ 
+
+Please align a SPOC and provide contact details, 
+
+SPOC for ECKMS integration.xlsx by 28.08.2024 EOD for coordination and integration of CMS and KMS.
+
+ 
+
+ 
+
+KMS Existing Features
+
+ 
+
+
+
+Feature / Use case
+
+Description
+
+Benefits
+
+Centralized Management of Keys
+
+Manages the entire lifecycle of cryptographic keys, from creation and distribution to archival and destruction, ensuring secure handling of keys throughout their lifecycle.
+
+Centralized platform to manage the cryptographic keys for all needs.
+
+Secure Key Transfer
+
+Facilitates the transfer of keys between different systems/applications/departments, while ensuring keys are not compromised during the transfer process.
+
+Enables users to securely share keys between servers, applications and departments in few clicks, without keeping any replica in the ecosystem.
+
+Ensures security of all the keys being shared.
+
+Tokenization (Vaultless and Vault-based): 
+
+Supports both vault less and vault-based tokenization methods for securely replacing sensitive data with unique identification symbols that retain all the essential information without compromising its security.
+
+It can be used to encrypt/mask sensitive data of all kinds.
+
+BYOK (Bring Your Own Key)
+
+Enables users to keep central repository or replica of all the keys already in use but not generated using KMS portal.
+
+Provide platform to keep and track the status of all the keys already in use.
+
+Azure BYOK
+
+Allows you to bring and control your encryption keys within the Azure cloud, giving you complete control over data encryption.
+
+Provides secure transaction and sharing of keys from Azure cloud to Bank with few clicks.
+
+AWS BYOK
+
+BYOK functionality to Amazon Web Services, enables secure key management within the AWS cloud environment.
+
+Allows AOs to share the keys with AWS securely with few clicks
+
+BYOE (Bring Your Own Encryption)
+
+While it provides multiple algorithms for encryption but it also enables user to use own encryption mechanisms to protect data, providing greater control over the security of your information.
+
+Provide flexibility to user to use their algorithm for encryption of data.
+
+Role Based Access Control
+
+Implements strict role-based access control, ensuring that only authorized personnel can access and manage cryptographic keys
+
+Keys can be accessed by authorised users only.
+
+ 
+
+ 
+
+KMS Upcoming Features
+
+ 
+
+
+
+Feature / Use case
+
+Description
+
+Benefits
+
+Current Status
+
+Token-Based Authentication in KMS
+
+Token-based authentication in KMS is a method of securing access to Sensitive
+resources by using Tokens as a means of authentication and authorization.
+
+This approach allows users or systems to authenticate once and then use the issued token for subsequent
+requests to access protected resources.
+
+Under development
+
+Power Apps integration with Key Management Solution(KMS)
+
+Power Apps can utilize KMS to protect sensitive data by encrypting it using keys stored in a KMS. It helps securely store and tightly control access to tokens, passwords, certificates, API keys and other secrets.
+
+By Integrating KMS with Power Apps Organizations can meet regulatory requirements for Data protection and Enhanced Security and Centralized Key Management.
+
+Development completed
+
+Key Vault Service 
+
+Key Vault is a service that allows users to securely store and manage Sensitive information, such as encrypting keys, secrets (e. g, Passwords, API keys, certificates ),and cryptographic keys.
+
+The service is designed to help safeguard secrets and keys that are used by Cloud Applications and services, Providing a centralized and secure repository with tight access control.
+
+Under development
+
+Transparent Data Encryption (TDE) Keys
+
+TDE Keys used for data encryption of various databases to be stored securely in KMS for compliance requirement.
+
+TDE keys will be securely available in KMS in case of loss of keys within the application source database and thereby preventing data loss.
+
+Under UAT
+
+ 
+
+The present KMS integration status is given below:
+
+ 
+
+
+
+Department
+
+KMS Feature Implementation
+
+Integration Status
+
+HRMS
+
+Azure cloud integration with KMS
+
+Live
+
+Analytics
+
+Azure cloud integration with KMS
+
+UAT Completed
+
+ATM
+
+Secure Key Transfer
+
+UAT Completed
+
+Software Factory
+
+Power Apps Integration
+
+Work in progress
+
+Software Factory
+
+Tokenization
+
+Work in Progress
+
+INB
+
+Azure cloud integration with KMS
+
+Initiated for WhatsApp Banking Voice Feature
+
