@@ -1,0 +1,393 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"argoproj.io/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"epay-admin-dev","namespace":"openshift-gitops"},"spec":{"destination":{"namespace":"dev-admin","server":"https://kubernetes.default.svc"},"project":"sbiepay","sources":[{"helm":{"valueFiles":["values-java.yaml","$values/cluster/nonprod/dev/epay_admin_service/values.yaml"]},"path":"master-chart","repoURL":"https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git","targetRevision":"main"},{"ref":"values","repoURL":"https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git","targetRevision":"main"}]}}
+  creationTimestamp: "2026-09-05T07:50:47Z"
+  generation: 5811
+  name: epay-admin-dev
+  namespace: openshift-gitops
+  resourceVersion: "1011559234"
+  uid: 5588669c-9295-4cb2-91ac-1040d13c83e0
+spec:
+  destination:
+    namespace: dev-admin
+    server: https://kubernetes.default.svc
+  project: sbiepay
+  sources:
+  - helm:
+      releaseName: admin
+      valueFiles:
+      - values-java.yaml
+      - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+    path: master-chart
+    repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+    targetRevision: main
+  - ref: values
+    repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+    targetRevision: main
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=false
+    - ServerSideApply=true
+status:
+  controllerNamespace: openshift-gitops
+  health:
+    lastTransitionTime: "2026-09-17T11:29:35Z"
+    status: Healthy
+  history:
+  - deployStartedAt: "2026-09-10T14:57:26Z"
+    deployedAt: "2026-09-10T14:57:29Z"
+    id: 2
+    initiatedBy:
+      username: admin
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - 64cf2144cd7587165bcb95a19ec8d8097d1daf11
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-10T15:21:48Z"
+    deployedAt: "2026-09-10T15:21:51Z"
+    id: 3
+    initiatedBy: {}
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - ef4ed8b4d2e0dd3a8296fb2a09994fd6eeceb6ca
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-11T09:46:30Z"
+    deployedAt: "2026-09-11T09:46:33Z"
+    id: 4
+    initiatedBy:
+      username: admin
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - ef4ed8b4d2e0dd3a8296fb2a09994fd6eeceb6ca
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-11T14:09:06Z"
+    deployedAt: "2026-09-11T14:09:09Z"
+    id: 5
+    initiatedBy:
+      username: admin
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - 8fe53a0865dcc5ae01619845e4e4af0e9353ffab
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-12T04:34:24Z"
+    deployedAt: "2026-09-12T04:34:25Z"
+    id: 6
+    initiatedBy:
+      automated: true
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - 9aaf586a531450927fe201d30fee41ae7d8b9cb1
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-14T08:04:12Z"
+    deployedAt: "2026-09-14T08:04:16Z"
+    id: 7
+    initiatedBy: {}
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - cdede45c43a5f65487cc3608558e4b27d15318f8
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-14T08:17:10Z"
+    deployedAt: "2026-09-14T08:17:16Z"
+    id: 8
+    initiatedBy: {}
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - 0a93819e3025b7eebf8bf74975cad87dbebc7a6a
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-14T08:20:55Z"
+    deployedAt: "2026-09-14T08:20:58Z"
+    id: 9
+    initiatedBy: {}
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - 099f3286a0c5273d9b019a592910ed346a66c763
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-14T08:31:56Z"
+    deployedAt: "2026-09-14T08:32:00Z"
+    id: 10
+    initiatedBy: {}
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - a4880957f8e18b6f5096b0a3dccd84e76145ee44
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  - deployStartedAt: "2026-09-14T09:23:37Z"
+    deployedAt: "2026-09-14T09:23:40Z"
+    id: 11
+    initiatedBy: {}
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - f34a80f1ed2fe60285f8a1435a632b0b49847e91
+    source:
+      repoURL: ""
+    sources:
+    - helm:
+        releaseName: admin
+        valueFiles:
+        - values-java.yaml
+        - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+      path: master-chart
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+      targetRevision: main
+    - ref: values
+      repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+      targetRevision: main
+  operationState:
+    finishedAt: "2026-09-14T09:23:40Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        prune: true
+        revision: main
+        revisions:
+        - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+        - 9aaf586a531450927fe201d30fee41ae7d8b9cb1
+        syncOptions:
+        - CreateNamespace=false
+        - ServerSideApply=true
+    phase: Succeeded
+    startedAt: "2026-09-14T09:23:37Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/admin-adminservice configured
+        name: admin-adminservice
+        namespace: dev-admin
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        images:
+        - artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/app/backend/epay_admin_service:dev-02a3ace1
+        kind: Deployment
+        message: deployment.apps/admin-adminservice configured
+        name: admin-adminservice
+        namespace: dev-admin
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: autoscaling
+        hookPhase: Running
+        kind: HorizontalPodAutoscaler
+        message: horizontalpodautoscaler.autoscaling/admin-adminservice configured
+        name: admin-adminservice
+        namespace: dev-admin
+        status: Synced
+        syncPhase: Sync
+        version: v2
+      - group: networking.istio.io
+        hookPhase: Running
+        kind: VirtualService
+        message: virtualservice.networking.istio.io/admin-adminservice configured
+        name: admin-adminservice
+        namespace: dev-admin
+        status: Synced
+        syncPhase: Sync
+        version: v1beta1
+      revision: ""
+      revisions:
+      - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+      - f34a80f1ed2fe60285f8a1435a632b0b49847e91
+      source:
+        repoURL: ""
+      sources:
+      - helm:
+          releaseName: admin
+          valueFiles:
+          - values-java.yaml
+          - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+        path: master-chart
+        repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+        targetRevision: main
+      - ref: values
+        repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+        targetRevision: main
+  reconciledAt: "2026-09-17T13:55:19Z"
+  resources:
+  - health:
+      status: Healthy
+    kind: Service
+    name: admin-adminservice
+    namespace: dev-admin
+    status: OutOfSync
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: admin-adminservice
+    namespace: dev-admin
+    status: OutOfSync
+    version: v1
+  - group: autoscaling
+    health:
+      status: Missing
+    kind: HorizontalPodAutoscaler
+    name: admin-adminservice
+    namespace: dev-admin
+    status: OutOfSync
+    version: v2
+  - group: networking.istio.io
+    kind: VirtualService
+    name: admin-adminservice
+    namespace: dev-admin
+    status: OutOfSync
+    version: v1beta1
+  sourceHydrator: {}
+  sourceTypes:
+  - Helm
+  - ""
+  summary:
+    images:
+    - artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/app/backend/epay_admin_service:dev-a2ef5638
+    - registry.redhat.io/openshift-service-mesh/istio-proxyv2-rhel9@sha256:1306526a12590e284b1170cfccdf91388520360e2d7afab0d7f57111c4f28662
+  sync:
+    comparedTo:
+      destination:
+        namespace: dev-admin
+        server: https://kubernetes.default.svc
+      source:
+        repoURL: ""
+      sources:
+      - helm:
+          releaseName: admin
+          valueFiles:
+          - values-java.yaml
+          - $values/cluster/nonprod/dev/epay_admin_service/values.yaml
+        path: master-chart
+        repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-helm-charts.git
+        targetRevision: main
+      - ref: values
+        repoURL: https://gitlab.sbi/itepaypg-sbiepay2/infra/devops/epay-deployment-config.git
+        targetRevision: main
+    revisions:
+    - f1377f73cd52d04ec19b27bdcebdad85174f64c3
+    - 6c4d621aecf532a82f4151e929642781896f91ff
+    status: OutOfSync
+ 
