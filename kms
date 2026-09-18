@@ -190,3 +190,301 @@ Azure cloud integration with KMS
 
 Initiated for WhatsApp Banking Voice Feature
 
+
+
+
+with reference to trailing mail, Kindly advise the tentative timeline and details about the below project. 
+
+
+
+Key Vault Service 
+Key Vault is a service that allows users to securely store and manage Sensitive information, such as encrypting keys, secrets (e. g, Passwords, API keys, certificates ),and cryptographic keys.
+The service is designed to help safeguard secrets and keys that are used by Cloud Applications and services, Providing a centralized and secure repository with tight access control.
+Under development
+
+We are planning to use Red hat OpenShift in our application , whether Key vault services will be available to Red hat OpenShift, How it will be connected with  CKMS etc.?
+
+
+
+
+Dear Vishnu ji,
+
+Please note that team is working on collating the inputs from various teams internally. So team may need some time to get back.
+
+I have already asked this to be expedited and share the timelines asap.
+
+Be assured you shall receive the timelines soon. You shall again receive a status update today second half if the same is ready or not.
+
+Thanks,
+Jigar Ladhani
+
+
+ 
+Dear Vishnu Sir,
+
+I apologize for not sharing the details as promised yesterday.
+
+We will release the package on 15th November 2024, and the SOP document will be shared on Thursday, 10th October 2024. The SOP will include the integration details along with the architecture diagram.
+
+Please let us know if you have any questions or need further information.
+
+
+Dear Subbarao sir,
+
+Please note that currently team is working on the development of this new requirement and they would be releasing the primary package by 25-11-2024.
+
+Since this being a new requirement so team will be required to be allowed ample time to ensure all functionalities must work as required primarily. 
+
+Also our current engineer is consumed in other priority activities so we are utilising this time to give to our development team.
+
+Thanks,
+Jigar Ladhani
+
+
+Dear Sir/Ma'am,
+As discussed in the last meeting, we have made the following configuration changes in the Operator service:
+Replaced InitContainer with a Sidecar Operator to dynamically fetch secrets, ensuring the main container starts without failures.
+Removed hardcoded credentials and implemented Kubernetes Secrets with placeholders in Custom Resources (CR) for secure credential management.
+Implemented per-deployment secret mounting instead of using a centralized directory.
+Enabled secret injection as environment variables and configured the Secret volume mount in the Deployment, as specified in the Custom Resource, using Key-Label mapping from KMS.
+Please find attached the updated SOP document, which includes integration details along with the architecture diagram.
+
+
+with reference to trailing mail , Please find the response of our Solutioning Team  and arrange to respond the queries : 
+
+----------------------------------------------------------------------------------------------------------------
+Hi Team,
+
+After analysis, this seems to be better than earlier one but below are few trade-offs.
+
+
+
+
+Concern
+
+Impact
+
+WebSocket reliability
+
+Long-lived connections are fragile in k8s networks (e.g., node restarts, proxy timeouts). Requires resilient reconnect logic.
+
+Scaling issues
+
+For high-volume CR changes or thousands of deployments, managing parallel socket connections becomes a bottleneck.
+Sidecar for each pod still adds resource usage and operational overhead.
+Needs to be robust for reconnection, retries, and caching.
+
+CRD controller complexity
+
+You still have to maintain a custom controller/operator to react to CR changes and interface with Vault.
+
+Harder observability
+
+WebSocket-based systems are harder to trace/debug compared to pull-based sync or controller reconciliation loops.
+
+Vendor/infra compatibility
+
+WebSocket-based systems sometimes behave poorly under proxies, NAT gateways, or certain ingress controllers.
+
+CVE/Upgrades
+
+Adds another dependency for upgrades of K8s/Openshift API Server
+
+ 
+
+Further, few things to clarify
+
+how quick JISA team is going to fix any CVE’s or API Upgrades.
+Operational Support.
+How compatible is it with Openshift platform (ingress, CNIs)?
+How changes in keys/secrets in KMS will be populated to pods ?
+
+options may also be explored :
+
+Vault CSI driver for Kubernetes – securely mounts secrets as volumes
+Kubernetes External Secrets (KES) – CRD-based but uses pull model, less real-time but more robust
+
+
+The remediations for your concerns have been provided in the table below. Kindly review them and let me know if any further clarification is required.
+
+
+
+Concern
+Clarification / Impact Mitigation
+WebSocket reliability
+ The current design does not use WebSockets. We use a controller reconciliation loop (every syncIntervalSeconds) per CR. This avoids long-lived fragile socket connections.
+Scaling issues
+we are using a single Operator handles all CRs, pulling secrets periodically and injecting them as volumes. This reduces memory/CPU overhead per Pod.
+CRD controller complexity
+While CRD-based logic exists, it's centralized, manageable, and native to Kubernetes patterns. 
+Observability
+Pull-based logic is easier to trace — logs are emitted per CR per sync, with standard INFO and ERROR levels. No complex socket tracing is needed.
+Vendor/infra compatibility
+Pull-model works cleanly behind proxies, NAT, or OpenShift ingress — since it uses simple K8s watch + HTTP(s), no WebSockets involved.
+CVE/Upgrades
+Our Operator uses only standard SDK (Java Operator SDK 5+) and Fabric8 client. We track upstream CVEs via GitHub dependabot alerts and Operator SDK releases.
+
+We have evaluated:
+Vault CSI Driver – Ideal when using Vault directly; but our system uses a custom KMS.
+Kubernetes External Secrets (KES) – Our implementation is conceptually similar: CRD + controller + periodic sync. However, ours is customized for KMS logic and integrates directly with specific deployment targets.
+
+
+Madam/Sir,
+
+with reference to trailing mail , we have raised ITSAM Request: 869646 for UAT KMS user creation. Please arrange.
+
+FAR for UAT OpenShift env to UAT KMS is in place , Please advise the further steps/pre-requisites .
+
+Please advise the progress on improvements suggested during the meeting and also on "Secrets Store CSI Driver" integration-based approach.
+
+Dear Sir,
+
+Regarding the Secret Store CSI Driver, the team is checking feasibility. I will provide an update once we receive update from them.
+
+Additionally, the user account has been created in the UAT KMS Portal, and the login steps have been shared through the ITSM ticket. We will also share the image file required for the integration asap.
+
+
+Madam/Sir,
+
+with reference to trailing mail and attached document , Our Solution architect Team provided the following feedback , our team available 01-11-2025 ( Tomorrow) 03: 00 PM for further discussion , please confirm the availability . 
+---------------------------------------------------------------------------------------------------
+Based on the shared PDF, while this version is better and functionally possible PFB my observations :
+Critical caveats and drawbacks
+Major security risks
+emptyDir volume storage
+Secrets stored in plaintext on the node filesystem
+No encryption at rest
+Vulnerable to node compromise
+No automatic secret rotation
+Manual rotation process
+No time-based expiration
+No lifecycle management
+Potential Operational limitations
+Limited scalability
+Operator writes to each pod individually
+No batch operations or caching
+Performance issues at scale
+Single point of failure
+Single replica operator (no HA mentioned)
+No failover mechanisms
+Secrets unavailable during operator downtime
+Standards and compatibility
+Not aligned with industry standards
+Not using Secrets Store CSI Driver
+Not compatible with External Secrets Operator
+Missing CNCF standard patterns
+Missing major features
+No dynamic secrets
+Static injection only
+No templating capabilities
+Limited audit logging
+No comprehensive audit trails
+Limited secret access tracking
+No SIEM integration
+No secret versioning
+Cannot rollback to previous versions
+No change history
+
+If any of the above is already resolved in recent versions, please ask the vendor to share more details.
+
+
+
+Please find attached the KMS Operator Service package. Kindly push it to the internal registry.
+
+​Kms-operator-service ePay & PG Dept​
+
+Additionally, please share the IP addresses where the Operator Service will be deployed so that we can generate the required certificates for secure handshaking.
+
+
+Madam/Sir,
+
+Thank you for arranging the session, Please advise suitable time  for  Kubernetes demo session.
+
+Few queries as under : 
+
+In FAR Rule-1 ( Cryptobind(CKMS) to OpenShift/Kubernetes Cluster) , cannot be exposed on TCP/9090, it should utilise the existing exposed port 443 only on https URL. Please confirm.
+
+SOP section 9, Page-12 Step 3.3 ["Writes to tmpfs: /run/secrets/{label} (emptyDir with medium: Memory)"] , not clear. Whether decrypted secrets are mounted on connector Deamonset pod or Application pod?
+
+"/run/secrets/{label}" secret mount point path should be configurable.As in hardened containers/pods , all the paths are not writable, sometimes may require to use /temp etc.
+
+SOP section 9, Page-12 Step 3.4, calling the API for getting decrypted secret is cumbersome process , requires many changes in applications. In current practices secrets are mounted to applications pods. Please confirm.
+
+How secrets as files , private keys (.key) files, .cer files (certificates) etc will be handled?
+
+For secret rotation post api calling is also not clear ?
+
+
+Regards,
+
+Vishnu Kumar Gehlot
+
+
+Please find below our comments regarding the queries raised by the respective department.
+
+01. In FAR Rule-1 ( Cryptobind(CKMS) to OpenShift/Kubernetes Cluster) , cannot be exposed on TCP/9090, it should utilise the existing exposed port 443 only on https URL. Please confirm.
+
+JISA Comment : 
+Currently, the CryptoBind CSI components use internal cluster HTTP ports rather than the OpenShift Route/HTTPS port 443.
+CSI Driver API: 9090
+Java Operator: 9090
+Connector: 8081
+CSI Manager: 8080
+These are primarily in-cluster Service ports and are not intended for public OpenShift exposure. However, in the current architecture, the communication does not exclusively use HTTPS over port 443.
+So, if the FAR requirement mandates that all CKMS and OpenShift cluster communication must use HTTPS over port 443 only, the current implementation does not meet this requirement. This would require an architectural/network-level change, such as implementing an OpenShift Route/Ingress with TLS termination, TLS sidecars, or an equivalent HTTPS-based communication mechanism. This is the part of the roadmap and it will be implemented in the upcoming release.
+
+02. SOP section 9, Page-12 Step 3.3 ["Writes to tmpfs: /run/secrets/{label} (emptyDir with medium: Memory)"] , not clear. Whether decrypted secrets are mounted on connector Deamonset pod or Application pod?
+
+JISA Comment : 
+Yes, Decrypted secrets are mounted on the Connector DaemonSet pod.
+Flow : 
+CSI driver mounts encrypted files into the app pod (e.g. /cryptobind/secrets/*.enc)
+Connector (node DaemonSet) reads those encrypted files from the node path and decrypts them.
+Connector writes plaintext to its own tmpfs emptyDir at /run/secrets/{label} inside the connector pod
+App is expected to get plaintext via Connector HTTP API (/api/v1/secrets/{label}), not by reading that connector tmpfs path.
+So, Connector pod is RAM filesystem, not the app-pod mount of plaintext.
+
+03. "/run/secrets/{label}" secret mount point path should be configurable. As in hardened containers/pods , all the paths are not writable, sometimes may require to use /temp etc.
+
+JISA Comment : 
+Partially Yes. The functionality is supported in the code but is fixed in the current deployment configuration.
+The Connector supports the --output-dir flag, with a default value of /run/secrets. However, in the current DaemonSet configuration, the output directory is hardcoded to /run/secrets.
+04. SOP section 9, Page-12 Step 3.4, calling the API for getting decrypted secret is cumbersome process , requires many changes in applications. In current practices secrets are mounted to applications pods. Please confirm.
+
+JISA Comment : 
+Yes, The current practices secrets are mounted to applications pods.
+The application pods do not receive plaintext secrets as regular mounted files. Instead, the applications retrieve the required secrets through the Connector API. 
+
+If the standard requirement is to have secrets directly mounted into application pods as files, the current implementation differs from that approach and would require additional integration changes at the application level. The service has been designed and implemented in accordance with the RBI guidelines shared previously.
+
+05. How secrets as files , private keys (.key) files, .cer files (certificates) etc will be handled?
+
+JISA Comment : 
+It is handled as opaque secret payload only. Whatever data is returned by the KMS, whether text or binary encoded within the secret data is handled as encrypted bytes and subsequently decrypted as bytes.
+There is no specialized handling for certificate or key-file types, such as automatic PEM formatting or mounting of multi-file certificate bundles.
+If the secret content is a key or certificate string, the application receives the content through the API or through a Connector temporary filesystem (tmpfs) file identified by its label. File extensions and related semantics are managed at the application level and are not natively handled by the CSI implementation.
+
+06. For secret rotation post api calling is also not clear ?
+
+JISA Comment : 
+Rotation is webhook-driven and is not initiated through an application POST request.
+The typical rotation flow is as follows:
+KMS/Java Operator notifies the CSI Manager through a webhook.
+The CSI Manager instructs the CSI Driver to rewrite the encrypted secret files and activate the new secret version.
+The Connector detects the file change, re-decrypts the updated secret, and refreshes its cache/API response.
+Therefore, the application POST API is not the primary mechanism for secret rotation. Applications typically retrieve the updated secret from the Connector through a GET request or by polling for changes.
+
+Please let us know if any further clarifications are required.
+
+Thanks,
+PritiRanjan Sahoo
+
+
+Madam/Sir,
+
+Please find the responses from JISA/CKMS Team , meeting arranged TODAY 04:00 PM.
+
+be ready with queries and challenges if any.
+
+
+
