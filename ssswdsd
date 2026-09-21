@@ -1,0 +1,47 @@
+“For the Argo Rollouts Canary implementation, we are targeting December for completion across all environments, including Production.
+
+First, we will complete the DEV POC with Argo Rollouts, Istio traffic splitting and Prometheus-based AnalysisRun.
+
+Then we will validate the complete canary flow in lower environments—10%, 25%, 50% and finally 100% traffic—with both successful and failure/rollback scenarios.
+
+After that, we will integrate it with our existing GitLab, Helm and ArgoCD/ApplicationSet deployment flow and validate the GitOps ownership of the Istio VirtualService, because Argo Rollouts dynamically manages traffic weights.
+
+Once the lower environments are stable, we will progressively onboard SIT/UAT/Pre-Prod and then Production. Production will additionally require approval, monitoring, rollback validation and controlled rollout planning.
+
+The timeline is therefore mainly because we need environment-wise validation and production-grade testing, rather than just implementing the Rollout YAML.”
+
+Agar manager pooche: “Itna time exactly kyu?”
+
+Aap ye 5 points bolo:
+
+Argo Rollouts POC
+Rollout CR
+Stable/Canary
+Istio integration
+Traffic shifting
+Analysis & rollback
+Prometheus metrics
+AnalysisRun
+Success scenario
+Failure scenario
+Automatic abort/rollback
+Existing CI/CD + GitOps integration
+GitLab pipeline
+Helm
+ArgoCD/ApplicationSet
+Existing VirtualService/DestinationRule
+GitOps drift/ownership handling
+
+Environment-wise validation
+
+DEV → SIT → UAT → PRE-PROD → PROD
+
+Har environment mein configuration, traffic, monitoring aur rollback validate karna hai.
+
+Production rollout
+Change/approval process
+Monitoring
+Controlled traffic percentages
+Rollback readiness
+Documentation/runbook
+Production pilot and then wider adoption
